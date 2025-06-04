@@ -1,0 +1,6 @@
+node_modules
+.env
+saveEmail.txt
+server.js
+compile.cmd
+test.js
