@@ -220,6 +220,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
     document.addEventListener('keydown', function (e) {
+        const tag = e.target.tagName.toLowerCase();
+    if (tag === 'input' || tag === 'textarea') return;
         if (e.code === 'Space') {
             e.preventDefault();
             document.getElementById('nextProxy').click();

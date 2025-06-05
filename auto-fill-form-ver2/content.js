@@ -69,7 +69,7 @@ chrome.storage.local.get("fillRecipient", (data) => {
                                                         }
                                                     }
                                                 }, 300);
-                                            }
+                                            } 
                                         }, 300);
 
                                         break;  // click xong thì dừng
