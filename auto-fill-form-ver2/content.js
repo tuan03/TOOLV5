@@ -69,7 +69,12 @@ chrome.storage.local.get("fillRecipient", (data) => {
                                                         }
                                                     }
                                                 }, 300);
-                                            } 
+                                            } else {
+                                                const btn = document.querySelector('div[data-testid="payment-type"][role="button"]');
+                                                if (btn?.getAttribute('aria-label') === 'Change Goods and Services') {
+                                                    btn.click();
+                                                }
+                                            }
                                         }, 300);
 
                                         break;  // click xong thì dừng

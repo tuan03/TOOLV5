@@ -10,7 +10,7 @@ function showAlert(msg) {
     }, 2000);  // 100ms tự động ẩn
 }
 function updateInfo() {
-    const { cccd, tinh, gioi_tinh, birth, tinh_zip, address, town, family, middle, given, sdt, email, password, linkChange } = currentData;
+    const { cccd, tinh, gioi_tinh, birth, tinh_zip, address, town, family, middle, given, sdt, email, password, linkChange, totalLink } = currentData;
     const resetProxy = document.getElementById("resetProxy")
     resetProxy.addEventListener("click", async function () {
         const mt = await fetch(linkChange)
@@ -24,6 +24,7 @@ function updateInfo() {
     document.getElementById("info").innerText = `
 📧 Email: ${email}
 🔒 Mật khẩu: ${password}
+🔗 Số lượng link: ${totalLink}
 `;
 }
 
@@ -163,16 +164,26 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (data && !data.error) {
             const { firstLink, secondLink } = data;
             document.getElementById("email1Label").textContent = firstLink.email + " " + firstLink.amount;
+            document.getElementById("email1Label").onclick = function() {
+                window.open(firstLink.link, "_blank"); 
+            };
             document.getElementById("email2Label").textContent = secondLink.email + " " + secondLink.amount;
+            document.getElementById("email2Label").onclick = function() {
+                window.open(secondLink.link, "_blank"); 
+            };
             const requestGetErrorEmail1 = await fetch(`http://localhost:3000/getError/${firstLink.email}`)
             const dataErrorEmail1 = await requestGetErrorEmail1.json()
             if (!dataErrorEmail1.error) {
-                document.getElementById("email1").textContent = dataErrorEmail1.error;
+                document.getElementById("email1").value = dataErrorEmail1.textError;
+            } else { 
+                showAlert(dataErrorEmail1.error);
             }
             const requestGetErrorEmail2 = await fetch(`http://localhost:3000/getError/${secondLink.email}`)
             const dataErrorEmail2 = await requestGetErrorEmail2.json()
             if (!dataErrorEmail2.error) {
-                document.getElementById("email2").textContent = dataErrorEmail2.error;
+                document.getElementById("email2").value = dataErrorEmail2.textError;
+            } else {
+                showAlert(dataErrorEmail2.error);
             }
             const buttonSendErrorEmail1 = document.getElementById("buttonSendErrorEmail1")
             buttonSendErrorEmail1.onclick = async () => {
@@ -196,7 +207,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         } else {
             document.getElementById("email1Label").textContent = "Chưa có link"
+            document.getElementById("email1Label").onclick = function() {
+                showAlert("Chưa có link");
+            }
             document.getElementById("email2Label").textContent = "Chưa có link"
+            document.getElementById("email2Label").onclick = function() {
+                showAlert("Chưa có link");
+            }
         }
     }   
     const buttonUndoLink = document.getElementById("undoLink")

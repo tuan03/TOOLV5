@@ -20,6 +20,10 @@
     "js": ["content.js"]
   },
   {
+    "matches": ["https://www.paypal.com/myaccount/profile/email/list?entryPoint=profile_home*"],
+    "js": ["autoLoadFullMain.js"]
+  },
+  {
     "matches": ["https://www.paypal.com/vn/welcome/signup*"],
     "js": ["autofill.js"]
   },

@@ -145,11 +145,10 @@ document.addEventListener('mousedown', async function (event) {
     }
     const { firstLink, secondLink } = data;
     window.open(firstLink.link, '_blank', "noopener");
-    await delay(200);
+    await delay(50);
     window.open(secondLink.link, '_blank', "noopener");
     await delay(200);
-    window.open(firstLink.link, '_blank', "noopener");
-    await delay(200);
-    window.open(secondLink.link, '_blank', "noopener");
+    window.open("https://www.paypal.com/myaccount/profile/email/list?entryPoint=profile_home", '_blank', "noopener");
+    
   }
 });
