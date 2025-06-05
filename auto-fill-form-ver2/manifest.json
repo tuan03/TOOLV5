@@ -10,7 +10,11 @@
     "default_icon": "icon.png"
   },
   "content_scripts": [
-  
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"],
+      "run_at": "document_idle"
+    },
   {
     "matches": ["https://www.paypal.com/myaccount/transfer/homepage/pay*"],
     "js": ["content.js"]

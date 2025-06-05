@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-    fetch("https://api.ipify.org?format=json") // Gửi yêu cầu GET đến IP API
+    fetch("https://ipwho.is/") // Gửi yêu cầu GET đến IP API
         .then(response => response.json())     // Chuyển đổi kết quả thành JSON
         .then(data => {
             const myip = document.getElementById("myip"); // Lấy thẻ input có id "myip"
@@ -209,8 +209,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             showAlert(dataUndoLink.error);
         }
     }
-
-
+    const buttonNextLink = document.getElementById("nextLink")
+    buttonNextLink.onclick = async () => {
+        const requestNextLink = await fetch("http://localhost:3000/nextLink")
+        const dataNextLink = await requestNextLink.json()
+        if (dataNextLink.error) {
+            showAlert(dataNextLink.error);
+        } else {
+            showAlert("NextLink thành công, vui lòng reset lại trang chủ Paypal.");
+        }
+    }
     document.addEventListener('keydown', function (e) {
         if (e.code === 'Space') {
             e.preventDefault();
