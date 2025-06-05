@@ -165,11 +165,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             const { firstLink, secondLink } = data;
             document.getElementById("email1Label").textContent = firstLink.email + " " + firstLink.amount;
             document.getElementById("email1Label").onclick = function() {
-                window.open(firstLink.link, "_blank"); 
+                navigator.clipboard.writeText(firstLink.link)
             };
             document.getElementById("email2Label").textContent = secondLink.email + " " + secondLink.amount;
             document.getElementById("email2Label").onclick = function() {
-                window.open(secondLink.link, "_blank"); 
+                navigator.clipboard.writeText(secondLink.link)
             };
             const requestGetErrorEmail1 = await fetch(`http://localhost:3000/getError/${firstLink.email}`)
             const dataErrorEmail1 = await requestGetErrorEmail1.json()
@@ -213,6 +213,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             document.getElementById("email2Label").textContent = "Chưa có link"
             document.getElementById("email2Label").onclick = function() {
                 showAlert("Chưa có link");
+                
             }
         }
     }   
